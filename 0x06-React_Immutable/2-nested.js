@@ -1,15 +1,11 @@
 export default function accessImmutableObject(object, array) {
-  // Ensure the object is valid (not null or undefined)
-  if (object == null || !Array.isArray(array)) {
-    return undefined;
-  }
-
-  // Use reduce to traverse the path
+  // Iterate through the array and use each element to access the corresponding key in the object
   return array.reduce((acc, key) => {
-    // Ensure that acc is an object before accessing the key
-    if (acc == null || typeof acc !== 'object' || !acc.hasOwnProperty(key)) {
-      return undefined;  // Return undefined if the key doesn't exist or if acc is not an object
+    // If the current accumulator is undefined, return undefined immediately
+    if (acc === undefined || acc === null) {
+      return undefined;
     }
+    // Otherwise, continue drilling down into the object
     return acc[key];
   }, object);
 }
