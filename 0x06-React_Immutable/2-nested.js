@@ -1,21 +1,15 @@
-// Example object
-const obj = {
-  name: {
-    first: "Guillaume",
-    last: "Salva"
+export default function accessImmutableObject(object, array) {
+  // Ensure the object is valid (not null or undefined)
+  if (object == null || !Array.isArray(array)) {
+    return undefined;
   }
-};
 
-// Valid path
-const path = ['name', 'first'];
-console.log(accessImmutableObject(obj, path));  // Output: "Guillaume"
-
-// Invalid path (key 'middle' does not exist)
-const invalidPath = ['name', 'middle'];
-console.log(accessImmutableObject(obj, invalidPath));  // Output: undefined
-
-// Invalid path (wrong input type for array)
-console.log(accessImmutableObject(obj, 'name.first'));  // Output: undefined
-
-// Invalid object (null or undefined object)
-console.log(accessImmutableObject(null, ['name', 'first']));  // Output: undefined
+  // Use reduce to traverse the path
+  return array.reduce((acc, key) => {
+    // Ensure that acc is an object before accessing the key
+    if (acc == null || typeof acc !== 'object' || !acc.hasOwnProperty(key)) {
+      return undefined;  // Return undefined if the key doesn't exist or if acc is not an object
+    }
+    return acc[key];
+  }, object);
+}
