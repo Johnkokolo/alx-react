@@ -1,7 +1,7 @@
-// Import the Immutable.js library
+// Import Immutable.js library to use fromJS
 const { fromJS } = require('immutable');
 
-// Function to convert a regular object to an Immutable Map
+// Function to convert a JavaScript object to an Immutable Map
 function getImmutableObject(object) {
   return fromJS(object);
 }
@@ -14,6 +14,11 @@ const exampleObject = {
   thing: -914767132
 };
 
-// Calling the function
+// Convert to Immutable Map
 const immutableMap = getImmutableObject(exampleObject);
+
+// Log the Immutable Map to the console
 console.log(immutableMap);
+
+// Example output (you can check it in your console):
+// Map { "fear": true, "smell": -1033575916.9145899, "wall": false, "thing": -914767132 }
