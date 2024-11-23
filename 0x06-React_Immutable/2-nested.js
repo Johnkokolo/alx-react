@@ -1,11 +1,21 @@
-export default function accessImmutableObject(object, array) {
-  // Iterate through the array and use each element to access the corresponding key in the object
-  return array.reduce((acc, key) => {
-    // If the current accumulator is undefined, return undefined immediately
-    if (acc === undefined || acc === null) {
-      return undefined;
-    }
-    // Otherwise, continue drilling down into the object
-    return acc[key];
-  }, object);
-}
+// Example object
+const obj = {
+  name: {
+    first: "Guillaume",
+    last: "Salva"
+  }
+};
+
+// Valid path
+const path = ['name', 'first'];
+console.log(accessImmutableObject(obj, path));  // Output: "Guillaume"
+
+// Invalid path (key 'middle' does not exist)
+const invalidPath = ['name', 'middle'];
+console.log(accessImmutableObject(obj, invalidPath));  // Output: undefined
+
+// Invalid path (wrong input type for array)
+console.log(accessImmutableObject(obj, 'name.first'));  // Output: undefined
+
+// Invalid object (null or undefined object)
+console.log(accessImmutableObject(null, ['name', 'first']));  // Output: undefined
